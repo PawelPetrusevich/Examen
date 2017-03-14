@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Examen.Class;
 
 namespace Examen
 {
@@ -10,6 +11,16 @@ namespace Examen
     {
         static void Main(string[] args)
         {
+            try
+            {
+                Pilot pilot = new Pilot();
+                pilot.Poleteli();
+            }
+            catch (Error ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            Console.ReadKey();
         }
     }
 }

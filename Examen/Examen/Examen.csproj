@@ -43,6 +43,8 @@
   <ItemGroup>
     <Compile Include="Class\Airplan.cs" />
     <Compile Include="Class\Dispatcher.cs" />
+    <Compile Include="Class\Error.cs" />
+    <Compile Include="Class\Pilot.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

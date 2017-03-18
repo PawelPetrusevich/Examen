@@ -11,15 +11,22 @@ namespace Examen
     {
         static void Main(string[] args)
         {
+           
+
             try
             {
                 Pilot pilot = new Pilot();
                 pilot.Poleteli();
             }
-            catch (Error ex)
+            catch (Exception ex)
             {
+                
                 Console.WriteLine(ex.Message);
+                
             }
+            
+            
+            
             Console.ReadKey();
         }
     }

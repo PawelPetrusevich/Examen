@@ -12,6 +12,20 @@ namespace Examen.Class
         int score;
         List<Dispatcher> dispetchera;
         Airplan air;
+
+        public int Score
+        {
+            get
+            {
+                return score;
+            }
+
+            set
+            {
+                score = value;
+            }
+        }
+
         public delegate void Palet(int h,int s);
         public event Palet PaletEvent;
 
@@ -19,19 +33,20 @@ namespace Examen.Class
         {
             dispetchera = new List<Dispatcher>();
             air = new Airplan();
-            score = 0;
+            Score = 0;
         }
 
-        public void AddDispetcher()
+        public void AddDispetcher(List<Dispatcher> dispetchera)
         {
             string nameDispetcher;
             do
             {
                 Console.Clear();
-                Console.WriteLine("Ввудите имя диспетчера");
+                Console.WriteLine("Введите имя {0}=го диспетчера",dispetchera.Count);
                 nameDispetcher = Console.ReadLine();
                 if (nameDispetcher.Length > 0)
                 {
+                    //при создании добавляем подписку на событие
                     Dispatcher tempDisp = new Dispatcher(nameDispetcher, air);
                     dispetchera.Add(tempDisp);
                     PaletEvent += tempDisp.Info;
@@ -44,17 +59,29 @@ namespace Examen.Class
 
         public void Poleteli()
         {
-            Console.TreatControlCAsInput = true;
-            Console.WriteLine("Управление самолетом стандартное. Esc == выход.1 == дабавить диспетчера");
-            ConsoleKeyInfo cmd = Console.ReadKey();
+            ConsoleKeyInfo cmd;
+            Console.TreatControlCAsInput = true; //реагирование на shift
+            PaletEvent += air.Flaing;
+            
+            
             do
             {
+                //проблемы с выводом каректировки
+                Console.Clear();
+                Console.WriteLine("Управление самолетом(ESC -выход)");
+                Console.WriteLine("(Right: + 50км/ч, Left: -50км/ч, Shift- Right : +150км/ч, Shift- Left: -150км/ч)");
+                Console.WriteLine("(Up: +250м, Down: -250м, Shift- Up: +500м, Shift- Down: -500м)");
+                Console.WriteLine("1 -добавить диспетчера");
+                Console.WriteLine();                
+                Console.WriteLine("{0},  {1}", air.Hight, air.Speed);
 
 
+                cmd = Console.ReadKey();
                 if (cmd.Key == ConsoleKey.D1)
                 {
-                    air.AddDisp(dispetchera);
+                    AddDispetcher(dispetchera);
                 }
+                //упровление самолетом
                 if (dispetchera.Count > 2)
                 {
 
@@ -82,9 +109,16 @@ namespace Examen.Class
                 }
                 else
                 {
-                    Console.WriteLine("Не хватает пилотов");
+
+                    Console.WriteLine("Нехватает диспетчеров");
 
                 }
+                //foreach (var item in dispetchera)
+                //{
+                //    Console.WriteLine(item.rez);
+                //}
+                //Console.ReadKey();
+
             }
             while (cmd.Key!=ConsoleKey.Escape);
         }

@@ -42,24 +42,27 @@ namespace Examen
         #endregion
         public Airplan()
         {
+            //начальная высота чтобы не разбивался
             hight = 50;
-            Speed = 50;
+            speed = 50;
             dispetchera = new List<Dispatcher>();
         }
         public void AddDisp(List<Dispatcher> disp)
         {
+            Console.Clear();
             disp.AddRange(disp);
         }
 
-        public void Flaing(int tempHight,int tempSpeed)
+        public void Flaing(int tempSpeed,int tempHight)
         {
-            if (dispetchera.Count<2)
-            {
-                throw (new Error(ErrorMessage.TwoDispetcherNotFound));
-            }
-
+            //if (dispetchera.Count<2)
+            //{
+            //    throw (new Error(ErrorMessage.TwoDispetcherNotFound));
+            //}
+            //коректировка высоты и скорости
             hight += tempHight;
-            Speed += tempSpeed;
+            speed += tempSpeed;
+            Console.WriteLine("Высота == {0} , Скорость == {1} ",Hight,Speed);
 
         }
 
